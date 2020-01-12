@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h1>화해(버드뷰) 프로그래머스 챌린지</h1>
+<h2>django를 이용한 화장품 상품 rest api 개발</h2>
+<h3>테스트폼</h3>
+
+<h4>상품 리스트 조회</h4>
+<form action="{% url 'product-list' %}">
+    <div>
+    <label>스킨타입 *필수</label>
+    <select name="skin_type" required>
+        <option value="oily">지성</option>
+        <option value="dry">건성</option>
+        <option value="sensitive">민감성</option>
+    </select>
+    </div>
+    <div>
+    <label>카테고리</label>
+    <select name="category">
+        <option></option>
+        <option value="skincare">스킨케어</option>
+        <option value="maskpack">마스크팩</option>
+        <option value="skincare">선케어</option>
+        <option value="basemakeup">베이스메이크업</option>
+    </select>
+    </div>
+    <div>
+    <label>포함성분</label>
+    <select name="include_ingredient">
+        <option></option>
+        {% for ingredient in ingredient_list %}
+            <option value="{{ ingredient.name }}">{{ ingredient.name }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div>
+    <label>불포함성분</label>
+    <select name="exclude_ingredient">
+        <option></option>
+        {% for ingredient in ingredient_list %}
+            <option value="{{ ingredient.name }}">{{ ingredient.name }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <button type="submit">조회</button>
+</form>
+
+<h5>상품 디테일 조회 1번 상품(피부타입에 따라 추천 상품이 달라집니다.)</h5>
+<form action="{% url 'product-detail' 1 %}">
+    <select name="skin_type" required>
+        <option value="oily">지성</option>
+        <option value="dry">건성</option>
+        <option value="sensitive">민감성</option>
+    </select>
+    <button type="submit">조회</button>
+</form>
+</body>
+</html>
